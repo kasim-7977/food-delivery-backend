@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-orst#hp6_w!w4chm5nien&a@l@$5dw9w4s6@)6mv)tp&#a*qeh
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://food-delivery-api-cyuc.onrender.com"
+    "https://food-delivery-api-cyuc.onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
 
 
