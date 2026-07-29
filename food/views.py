@@ -76,6 +76,7 @@ def category_list(request):
 def food_list(request):
     foods = Food.objects.all()
     serializer = FoodSerializer(foods, many=True)
+    context={"request": request}
     return Response(serializer.data)
 
 class DashboardView(APIView):
