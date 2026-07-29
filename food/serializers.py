@@ -8,15 +8,15 @@ class FoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food
         fields = '__all__'
-def get_image(self, obj):
-    request = self.context.get("request")
+    def get_image(self, obj):
+        request = self.context.get("request")
 
-    if request:
-        return request.build_absolute_uri(
+        if request:
+            return request.build_absolute_uri(
                 obj.image.url
             )
 
-    return obj.image.url      
+        return obj.image.url      
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
