@@ -137,5 +137,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 CORS_ALLOWED_ORIGINS = [
-    "https://food-delivery-frontend-git-main-kasim-7977s-projects.vercel.app",
+    "https://food-delivery-frontend-ecru-eight.vercel.app",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://food-delivery-frontend-ecru-eight.vercel.app",
 ]
