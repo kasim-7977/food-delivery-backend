@@ -28,12 +28,14 @@ ALLOWED_HOSTS = [
      "food-delivery-api-cyuc.onrender.com",
      "localhost",
      "127.0.0.1",
-]
+     ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -138,4 +140,15 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://food-delivery-frontend-ecru-eight.vercel.app",
 ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://food-delivery-frontend-ecru-eight.vercel.app",
+]
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": " qgbhmceb",
+    "API_KEY": "297296151948149",
+    "API_SECRET": "ZjHb2MBlB15qc5SQbrrG0MlOXW0",
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

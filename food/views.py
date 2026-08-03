@@ -75,7 +75,9 @@ def category_list(request):
 @api_view(['GET'])
 def food_list(request):
     foods = Food.objects.all()
-    serializer = FoodSerializer(foods, many=True)
+    serializer = FoodSerializer(foods, many=True,
+    context={"request": request}
+    )
     return Response(serializer.data)
 
 class DashboardView(APIView):
