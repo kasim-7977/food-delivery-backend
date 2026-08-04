@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-orst#hp6_w!w4chm5nien&a@l@$5dw9w4s6@)6mv)tp&#a*qeh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
      "food-delivery-api-cyuc.onrender.com",
