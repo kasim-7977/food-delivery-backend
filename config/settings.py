@@ -10,6 +10,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import cloudinary
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +38,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'cloudinary',
-    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,10 +147,13 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "https://food-delivery-frontend-ecru-eight.vercel.app",
 ]
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": " qgbhmceb",
-    "API_KEY": "297296151948149",
-    "API_SECRET": "ZjHb2MBlB15qc5SQbrrG0MlOXW0",
-}
-
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+# CLOUDINARY_STORAGE = {
+#     "CLOUD_NAME": " qgbhmceb",
+#     "API_KEY": "297296151948149",
+#     "API_SECRET": "ZjHb2MBlB15qc5SQbrrG0MlOXW0",
+# }
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+)

@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to="categories/")
+    image = CloudinaryField("image")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
