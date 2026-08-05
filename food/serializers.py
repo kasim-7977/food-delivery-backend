@@ -19,9 +19,20 @@ class FoodSerializer(serializers.ModelSerializer):
         return obj.image.url      
 
 class CategorySerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = "__all__"
+
+    def get_image(self, obj):
+        request = self.context.get("request")
+
+        if request:
+            return request.build_absolute_uri(obj.image.url)
+
+        return obj.image.url
+        
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
