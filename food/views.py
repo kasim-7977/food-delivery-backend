@@ -44,9 +44,30 @@ class PlaceOrderView(APIView):
                 price=item["price"]
             )
 
+        # Send confirmation email
+        msg_body = f"""Hello {order.full_name},Your order has been placed successfully.
+
+         Order Details:
+            -------------------------
+Name: {order.full_name}
+Total Amount: ₹{order.total_amount}
+
+Thank you for ordering with us!
+
+Food Delivery Team
+"""
+
+        email_msg = EmailMessage(
+            subject="Order Placed Successfully",
+            body=msg_body,
+            to=[order.email]
+        )
+        email_msg.send(fail_silently=False)
+
         return Response({
             "message": "Order placed successfully!"
         })
+        
 class ProfileView(APIView):
 
     permission_classes = [IsAuthenticated]
@@ -102,17 +123,6 @@ class DashboardView(APIView):
             "total_orders": total_orders,
             "total_revenue": total_revenue,
         })
-         # Send confirmation email
-            msg_body = f"Order Placed Successfully!\nThank You {full_name}!"
-            email_msg = EmailMessage(
-                "Order Place Confirmation",  # Subject
-                msg_body,                        # Body
-                to=[email]                       # Recipient
-            )
-            email_msg.send()
-            
-            # Display success message
-            messages.success(request, "Order Placed Successfully!")
     
 
 #         later protect the dashboard
