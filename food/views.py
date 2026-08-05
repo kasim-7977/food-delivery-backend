@@ -10,6 +10,8 @@ from .models import Order,OrderItem,Food
 from .serializers import OrderSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
+from django.contrib import messages
+from django.core.mail import EmailMessage
 
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
@@ -26,6 +28,7 @@ class PlaceOrderView(APIView):
         order = Order.objects.create(
             user_id=request.data["user"],
             full_name=request.data["full_name"],
+            email=request.data["email"],
             mobile=request.data["mobile"],
             address=request.data["address"],
             city=request.data["city"],
@@ -99,6 +102,18 @@ class DashboardView(APIView):
             "total_orders": total_orders,
             "total_revenue": total_revenue,
         })
+         # Send confirmation email
+            msg_body = f"Order Placed Successfully!\nThank You {full_name}!"
+            email_msg = EmailMessage(
+                "Order Place Confirmation",  # Subject
+                msg_body,                        # Body
+                to=[email]                       # Recipient
+            )
+            email_msg.send()
+            
+            # Display success message
+            messages.success(request, "Order Placed Successfully!")
+    
 
 #         later protect the dashboard
 #         from rest_framework.permissions import IsAdminUser
