@@ -24,8 +24,8 @@ class RegisterView(generics.CreateAPIView):
 class PlaceOrderView(APIView):
 
     def post(self, request):
-
-        order = Order.objects.create(
+        try:
+            order = Order.objects.create(
             user_id=request.data["user"],
             full_name=request.data["full_name"],
             email=request.data["email"],
@@ -67,6 +67,11 @@ Food Delivery Team
         return Response({
             "message": "Order placed successfully!"
         })
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=500
+            )
         
 class ProfileView(APIView):
 
