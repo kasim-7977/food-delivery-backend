@@ -10,8 +10,8 @@ from .models import Order,OrderItem,Food
 from .serializers import OrderSerializer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from django.contrib import messages
-from django.core.mail import EmailMessage
+# from django.contrib import messages
+# from django.core.mail import EmailMessage
 
 class OrderCreateView(generics.CreateAPIView):
     queryset = Order.objects.all()
@@ -28,7 +28,7 @@ class PlaceOrderView(APIView):
             order = Order.objects.create(
             user_id=request.data["user"],
             full_name=request.data["full_name"],
-            email=request.data["email"],
+            # email=request.data["email"],
             mobile=request.data["mobile"],
             address=request.data["address"],
             city=request.data["city"],
@@ -42,36 +42,36 @@ class PlaceOrderView(APIView):
                 food_id=item["food"],
                 quantity=item["quantity"],
                 price=item["price"]
-            )
+           )
 
-        # Send confirmation email
-        msg_body = f"""Hello {order.full_name},Your order has been placed successfully.
+#         # Send confirmation email
+#         msg_body = f"""Hello {order.full_name},Your order has been placed successfully.
 
-         Order Details:
-            -------------------------
-Name: {order.full_name}
-Total Amount: ₹{order.total_amount}
+#          Order Details:
+#             -------------------------
+# Name: {order.full_name}
+# Total Amount: ₹{order.total_amount}
 
-Thank you for ordering with us!
+# Thank you for ordering with us!
 
-Food Delivery Team
-"""
+# Food Delivery Team
+# """
 
-        email_msg = EmailMessage(
-            subject="Order Placed Successfully",
-            body=msg_body,
-            to=[order.email]
-        )
-        email_msg.send(fail_silently=False)
+#         email_msg = EmailMessage(
+#             subject="Order Placed Successfully",
+#             body=msg_body,
+#             to=[order.email]
+#         )
+#         email_msg.send(fail_silently=False)
 
-        return Response({
-            "message": "Order placed successfully!"
-        })
-        except Exception as e:
-            return Response(
-                {"error": str(e)},
-                status=500
-            )
+#         return Response({
+#             "message": "Order placed successfully!"
+#         })
+#         except Exception as e:
+#             return Response(
+#                 {"error": str(e)},
+#                 status=500
+#             )
         
 class ProfileView(APIView):
 
